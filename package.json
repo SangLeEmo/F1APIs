@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "nodemon src/app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "migrate": "nodemon src/migration/raceResultMigration.ts"
   },
   "keywords": [],
   "author": "",

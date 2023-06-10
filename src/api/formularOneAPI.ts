@@ -8,7 +8,7 @@ interface IRaceResult {
     date: Date,
     winner: string,
     car: string
-    laps: number,
+    laps: number | null,
     time: string,
 }
 
@@ -16,13 +16,13 @@ async function getRaceResultByYear(year: string): Promise<IRaceResult[]> {
     const raceResult: IRaceResult[] = [];
     const htmlResponse = await axios.get(`${mainURL}/${year}/races.html`);
     const $ = cheerio.load(htmlResponse.data, null, true);
-    $('.resultsarchive-table > tbody > tr').each((i, e) => {
+    $('.resultsarchive-table > tbody > tr').each((i, e) => {        
         raceResult.push({
             grandPrix: $(e).find(`td:eq(1)`).text().trim(),
             date: new Date($(e).find(`td:eq(2)`).text().trim()),
             winner: $(e).find(`td:eq(3) span:eq(0)`).text().trim() + ' ' + $(e).find(`td:eq(3) span:eq(1)`).text().trim(),
             car: $(e).find(`td:eq(4)`).text().trim(),
-            laps: Number($(e).find(`td:eq(5)`).text()),
+            laps: $(e).find(`td:eq(5)`).text() == 'null' ? null : Number($(e).find(`td:eq(5)`).text()),
             time: $(e).find(`td:eq(6)`).text().trim(),
         });
     });
