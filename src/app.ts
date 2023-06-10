@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import router from './routes';
 
 dotenv.config();
 
@@ -15,6 +16,12 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/api', (_req, res) => {
+  res.send('API Running');
+});
+
+app.use('/api', router);
+
 const options = {
   "definition": {
     "openapi": "3.0.0",
@@ -23,7 +30,7 @@ const options = {
       "version": "1.0.0"
     },
     "servers": [
-      { "url": `https://${HOST}:${PORT}` }
+      { "url": `http://${HOST}:${PORT}` }
     ]
   },
   "apis": ["./src/routes/**.ts"]
