@@ -3,8 +3,11 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import router from './routes';
+import connectDB from './database';
 
 dotenv.config();
+
+connectDB();
 
 if (!process.env.PORT) {
   process.exit(1);
