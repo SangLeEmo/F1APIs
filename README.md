@@ -44,3 +44,6 @@ Confirm to migrate? [yes/no]:
 
 ```
 This migration will do both jobs create new data if it does not exist and update all existing data
+
+## APIs
+Swagger UI route for all APIs: http://{{your project host IP}}:3000/api/docs
